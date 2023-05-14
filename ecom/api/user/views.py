@@ -51,7 +51,7 @@ def signin(request):
 
     #sanitiztion of data validation 
    
-    if not re.match("\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b", username):# saying if its not regex then it should be matched to username
+    if not re.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", username):# saying if its not regex then it should be matched to username
         return JsonResponse({'error' : 'enter a valid email'})
 
 

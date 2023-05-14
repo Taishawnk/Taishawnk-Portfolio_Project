@@ -2,7 +2,7 @@ from django.db import migrations
 
 from api.user.models import CustomUser
 
-
+#this is a file i created and added to be able to generate a super user
 class Migration(migrations.Migration):
     def seed_data(apps, schema_editor):
         user = CustomUser(name='taishawn', 
