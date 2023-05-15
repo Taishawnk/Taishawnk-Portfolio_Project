@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions  import AllowAny
 
-from .serializers import UserSerializer 
+from .serializers import UserSerializer #serializers package and unpackage the data  on both sides of the server 
 from .models import CustomUser
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
@@ -105,7 +105,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 #seting / getting permisiions 
-    def get_permissions(self):
+    def get_permissions(self): #permission also help make sure someone can just set themself as a super user in an app like post man
         try:
             return [permission() for permission in self.permission_classes_by_action[self.action]]
         except KeyError:

@@ -10,5 +10,7 @@ urlpatterns = [
     path("product/",  include("api.product.urls")),            
     # this is not the home route for the our project as a whole but for the api app    be declare home iside of or view for api as a function
     #nameing is optional but is best practice
-    path("user/", include("api.user.urls")) 
+    path("user/", include("api.user.urls")),
+    path("order/", include("api.order.urls")) ,
+    path('payment/', include("api.payment.urls")) 
 ]

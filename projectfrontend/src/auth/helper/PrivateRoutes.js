@@ -1,0 +1,1 @@
+//our protected routes will go here meaning no one that dosnt and shouldnt have access can acces them

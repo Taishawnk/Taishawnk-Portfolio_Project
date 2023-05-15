@@ -11,6 +11,7 @@ urlpatterns = [
     #call from the vies section 
     path("logout/<int:id>/", views.signout, name='signout'), #how we target the logout by id as we sign out by id  in our users.view 
     path('', include(router.urls))#empty '' because its already deffined in the api url.py file
+   
 ]
 
 

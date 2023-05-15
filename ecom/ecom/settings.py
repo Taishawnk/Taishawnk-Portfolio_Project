@@ -25,7 +25,11 @@ SECRET_KEY = '1x6uwe63v9+g_^*-lcd0+j@)nz7mjbe(=&&=w@movk2n8gq%%+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = [    'DELETE',    'GET',    'OPTIONS',    'PATCH',    'POST',    'PUT',]
+
+# ALLOWED_HOSTS = ['*'] //this was blank and apparentl should have had the astrict for all that is my fault but the above is reccomended practice for production anyway 
 
 
 # Application definition
@@ -47,10 +51,11 @@ INSTALLED_APPS = [
     'api.category',
     'api.product',
     'api.user',
+    'api.order',
+    'api.payment',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,7 +63,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    
+    
     
     
 ]
@@ -150,8 +158,7 @@ REST_FRAMEWORK = {# added this in myself as well setts default permissions that 
     ]
 }
 
-CORS_ALLOW_ALL_ORIGINS: True
 
-AllOWED_HOSTS = ['*']
+
 
 
