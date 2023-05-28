@@ -9,6 +9,7 @@ djangorestframework = "*"
 pillow = "*"
 django = "==3.0.8"
 braintree = "*"
+django-csp = "*"
 
 [dev-packages]
 pytest = "*"

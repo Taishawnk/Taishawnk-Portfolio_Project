@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
-import Url_Routes from './Routes';
+import UrlRoutes from './Routes';
 
 const root = createRoot(document.getElementById('root'));
-root.render(<Url_Routes />);
+root.render(<UrlRoutes />);
 
 
 

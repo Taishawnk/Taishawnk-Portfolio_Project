@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from django.conf import settings
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'api.payment',
 ]
 
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "https://apis.google.com")
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,12 +67,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    
-    
-    
+    'django.middleware.common.CommonMiddleware'
     
 ]
+MIDDLEWARE.insert(
+    MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
+    'csp.middleware.CSPMiddleware'
+)
+
+CSP_MIDDLEWARE = {
+    'default-src': CSP_DEFAULT_SRC,
+    'script-src': CSP_SCRIPT_SRC,
+    # Add other directives as needed
+}
+
+CSP_MIDDLEWARE.update(getattr(settings, 'CSP_MIDDLEWARE', {}))
 
 ROOT_URLCONF = 'ecom.urls'
 
@@ -157,8 +169,9 @@ REST_FRAMEWORK = {# added this in myself as well setts default permissions that 
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'path/to/folder/containing/favicon.ico'),
+]
 
 
 
