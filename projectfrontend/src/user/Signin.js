@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
+import {signin, authenticate, isAuthenticated} from "../auth/helper/index"
 
+// form data is a complex object not a reguler object 
 const Signin = () => {
   const [values, setValues] = useState({
     name: "",
-    email: "",
-    password: "",
+    email: "test1@yahoo.com",
+    password: "Zululike1@",
     error: false,
     success: false,
     loading: false,
     didRedirect: false,
+    //will take the defaults out before deploying
   });
 
   const { name, email, password, error, success, loading, didRedirect } = values;
@@ -18,6 +21,25 @@ const Signin = () => {
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
+
+  const onSubmit = (event) => {
+    // on click will be our event for this one in my buttom below
+    event.preventDefault()// Prevent default form submission
+    setValues({...values, error:false, loading:true})//error false will remmove any existing errors populated from a previouse step
+    
+    signin({email,password}).then((data) => {
+        console.log("DATA", data);
+        if (data.token){
+          let sessionToken = data.token;
+          authenticate(sessionToken, () => {
+            console.log("Token ADDED!!!")
+          })
+        }
+      }
+    ).catch(
+      (err) => console.log("you have a error of", err)
+    )//destructuiong
+  }
 
   const successMessage = () => {
     return (
@@ -68,7 +90,7 @@ const Signin = () => {
             </div>
 
             <button
-              onClick={() => {}}
+              onClick={onSubmit}
               className="btn btn-success btn-block position-relative bottom-0 start-50 translate-middle-x"
             >
               Submit

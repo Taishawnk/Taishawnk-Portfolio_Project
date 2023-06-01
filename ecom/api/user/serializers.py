@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password #this allows you to bring in passowrd in plain  text and hash it out aka making it unreadable for any users that are not yourself
 from rest_framework.decorators import authentication_classes, permission_classes # if user is authenticated we send them permissions
-
 from .models import CustomUser
-
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -13,9 +11,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         #we are grabbing password from our Meta class model as password was never something we added to our models.py file for user the resone we didnt do it there is because we dont want the 
         #password to be visible 
 
-
         # because we are handeling sanitization of the passord aka hidding the password in our django views it is ok for us to save password directly to the database for now as follows
-        if password != None:#might need to change this to (is not None) making sure password is not empy before saving
+        if password is not None:#might need to change this to (is not None) making sure password is not empy before saving
             instance.set_password(password)
         instance.save()#save the instance
         return instance #return the instance
@@ -51,7 +48,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CustomUser
         extra_kwargs = {'password': {'write_only': True }}# Write only permissions we dont want people to be able to view password this is the point where you can add add extra parameters that you want added or modifyed to the database i if we want the functionality yo update/edit password
-        fields = ("name", "email","phone", "gender", "country", "state", 
+        fields = ("name", "email","password","phone", "gender", "country", "state", 
                   "is_active", "is_staff", 'is_superuser' )
         #feilds brought in from abstract user class   "is_active", "is_staff," 'is_superuser' can be see stock on the django admin panel and by stock i mean they come standerd with every new 
         #django project

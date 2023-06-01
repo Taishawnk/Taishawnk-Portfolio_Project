@@ -31,32 +31,36 @@ const Signup = () => {
     the [] is the magic part as it is where our value will auto set as the are being handled by the program 
     */
 
-    const submit = (event) => {
+    const onsubmit = (event) => {
         event.preventDefault();
-        setValues({...values, error: false})
-        signup({name, email, password})
-        .then((data) =>{
+        setValues({ ...values, error: false });
+        const user = {
+          name,
+          email,
+          password
+        };
+        signup(user)
+          .then((data) => {
             console.log("DATA", data);
-            if(data.email === email){
-                setValues({
-                    ...values, 
-                    name: "",
-                    email: "",
-                    password: "",
-                    error:"",
-                    success: true, 
-                })
-            }else{
-                setValues({
-                    ...values,
-                    error: true,
-                    success: false,
-                })
+            if (data.email === email) {
+              setValues({
+                ...values,
+                name: "",
+                email: "",
+                password: password,
+                error: "",
+                success: true
+              });
+            } else {
+              setValues({
+                ...values,
+                error: true,
+                success: false
+              });
             }
-        })
-        .catch(e => console.log("you have a error of", e))
-
-    }
+          })
+          .catch((e) => console.log("you have an error of", e));
+      };
 
     const successMessage = () =>{
         return(
@@ -111,7 +115,7 @@ const Signup = () => {
                             type="password"
                             ></input>
                         </div>
-                        <button onClick={submit} className="btn btn-success btn-block position-relative bottom-0 start-50 translate-middle-x">Submit
+                        <button onClick={onsubmit} className="btn btn-success btn-block position-relative bottom-0 start-50 translate-middle-x">Submit
                             {/*submit in the onclick is in reffrence to above method submit not the submit button*/}
                         </button>
                     </form>

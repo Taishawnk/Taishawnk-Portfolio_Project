@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from rest_framework.permissions  import AllowAny
-
 from .serializers import UserSerializer #serializers package and unpackage the data  on both sides of the server 
 from .models import CustomUser
 from django.http import JsonResponse
@@ -9,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt#makes a exception here for cross site request forgery( CSRF) that is part of django by default
 #decorators are used when you want to make a change in a file that is somewhere else but we dont want to go there and make the change we want to make it form here 
 from  django.contrib.auth import login, logout
-
 import re #allows us to uses regex \b[\w\.-]+@[\w\.-]+\.\w{2,4}\b
 import random
 
@@ -54,9 +52,10 @@ def signin(request):
     if not re.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", username):# saying if its not regex then it should be matched to username
         return JsonResponse({'error' : 'enter a valid email'})
 
-
-    if not re.match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})", password): #pay alot of attention here this migh error but the way I did it hopfully not
-        return JsonResponse({'error' : 'Ensure that password is 8 to 64 characters long and contains a mix of upper and lower case characters, one numeric and one special character'})
+    if len(password) < 3:
+        return JsonResponse({'error', 'Enter a valid password must be more then 3 char long'})
+    # if not re.match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})", password): #pay alot of attention here this migh error but the way I did it hopfully not
+    #     return JsonResponse({'error' : 'Ensure that password is 8 to 64 characters long and contains a mix of upper and lower case characters, one numeric and one special character'})
     
     #grab user model
     UserModel = get_user_model() # this is where we need our @csrf_exempt while also grabbing the muser model and matching it  and match its password and other attributes 

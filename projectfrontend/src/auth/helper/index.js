@@ -4,24 +4,26 @@ import { json } from "react-router-dom";
 import {API} from "../../backend"
 import {cartEmpty} from "../../core/helper/carthelper"
 
-export const signup = user =>{
+export const signup = user => {
     return fetch(`${API}user/`, {
-        method : "POST",
-        headers: {
-            Accept: "application/json", //accept the content I am sending 
-
-            "Content-type": "application/json" //content must be json
-        },
-        body: JSON.stringify(user)
-    }).then(
-       response => {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+      .then(response => {
         return response.json();
-       }
-    ).catch(
-        err => console.log("you have a error of",err,"Please resolve this issue")
-    )
-    
-}
+      })
+      .then(data => {
+        // Include the password field in the response
+        data.password = user.password;
+        return data;
+      })
+      .catch(err => console.log("you have an error of", err, "Please resolve this issue"));
+  };
+  
 
 //we could just copy the above and make small twiks and would have a working sign in app but we are using form data hear so we need to make a few diffrent changes
 
@@ -29,15 +31,22 @@ export const signup = user =>{
 export const signin = user =>{
     //https://javascript.info/formdata
     const formData = new FormData()
+
+    //this loop is responsable for creating the form data
     for(const name in user){
         formData.append(name, user[name])
     }
 
+    for(let key of formData.keys()){
+        console.log("theKey: ",  key);
+    }
+
     return fetch(`${API}user/login/`, {
         method: "POST",
-        body: FormData
+        body: formData,
     }).then(response =>{
-        return response.json
+        console.log("Success", response)
+        return response.json();
     }
     ).catch(err => console.log("The error",err," must be fixed befor continuing"))
 }
