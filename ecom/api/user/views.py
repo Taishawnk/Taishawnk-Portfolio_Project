@@ -52,10 +52,10 @@ def signin(request):
     if not re.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", username):# saying if its not regex then it should be matched to username
         return JsonResponse({'error' : 'enter a valid email'})
 
-    if len(password) < 3:
-        return JsonResponse({'error', 'Enter a valid password must be more then 3 char long'})
-    # if not re.match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})", password): #pay alot of attention here this migh error but the way I did it hopfully not
-    #     return JsonResponse({'error' : 'Ensure that password is 8 to 64 characters long and contains a mix of upper and lower case characters, one numeric and one special character'})
+    # if len(password) < 3:
+    #     return JsonResponse({'error', 'Enter a valid password must be more then 3 char long'})
+    if not re.match("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})", password): #pay alot of attention here this migh error but the way I did it hopfully not
+        return JsonResponse({'error' : 'Ensure that password is 8 to 64 characters long and contains a mix of upper and lower case characters, one numeric and one special character'})
     
     #grab user model
     UserModel = get_user_model() # this is where we need our @csrf_exempt while also grabbing the muser model and matching it  and match its password and other attributes 
