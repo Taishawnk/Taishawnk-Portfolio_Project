@@ -1,4 +1,5 @@
 import React from "react";
+import Menu from "./Menu";
 
 
 // this file is or everthing that is 
@@ -10,7 +11,8 @@ className = "bg-dark text-white p-4",
 children //is responsable for basic templete insertion of components
 }) =>{ 
     return(
-        <div>
+        <div className="wholeProjectDiv">
+            <Menu/> 
             <div className="container-fluid">{/*head*/}
                 <div className="jubotron bg-dark text-white text-center">
                     <h2 className="display-4">{title}</h2>
