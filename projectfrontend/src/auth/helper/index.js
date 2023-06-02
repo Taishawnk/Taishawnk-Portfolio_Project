@@ -1,6 +1,6 @@
 //this section will handle Auth
 //jason way to handle data 
-import { json } from "react-router-dom";
+import { Navigate, json } from "react-router-dom";
 import {API} from "../../backend"
 import {cartEmpty} from "../../core/helper/carthelper"
 
@@ -74,20 +74,23 @@ export const isAuthenticated = () => {
     }
 }
 
-export const signout= next => {
-    const userId = isAuthenticated() && isAuthenticated().user.userId
-
-
-    if(typeof window !== undefined){
-        localStorage.removeItem("customeToken")
-        cartEmpty(() => {});
-        //next()
-
-        return fetch(`${API}user/logout/${userId}`, {
-            method: "GET"
-        }).then(response => console.log("log out was success")).catch(
-            err => console.log("looks like there was a error of", err)
-
-        )
+export const signout = (next) => {
+    const auth = isAuthenticated();
+    const userId = auth && auth.user ? auth.user.userId : null;
+  
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('customeToken');
+      cartEmpty(() => {});
+  
+      return fetch(`${API}user/logout/${userId}`, {
+        method: 'GET',
+      })
+        .then((response) => {
+          console.log('Logout was successful');
+          return <Navigate to="/" />;
+        })
+        .catch((err) => {
+          console.log('Looks like there was an error:', err);
+        });
     }
-}
+  };
