@@ -76,7 +76,7 @@ export const isAuthenticated = () => {
 
 export const signout = (next) => {
     const auth = isAuthenticated();
-    const userId = auth && auth.user ? auth.user.userId : null;
+    const userId = auth && auth.user ? auth.user.id : null;
   
     if (typeof window !== 'undefined') {
       localStorage.removeItem('customeToken');

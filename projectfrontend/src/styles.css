@@ -49,4 +49,9 @@ body{
         color: black;
     }
     
-   
+   .spn-signout{
+    width: 6rem;
+    color:red;
+    margin-top: 8px;
+    
+}
