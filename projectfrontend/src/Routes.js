@@ -5,6 +5,8 @@ import PrivateRoutes from './auth/helper/PrivateRoutes';
 import Signup from "./user/Signup";
 import UserDashboard from './user/UserDashboard';
 import Signin from './user/Signin';
+import Cart from './core/Cart';
+
 
 const UrlRoutes = () => (
   <Router>
@@ -12,8 +14,9 @@ const UrlRoutes = () => (
       <Route path="/" element={<Home/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path='/signin' element={<Signin/>}/>
-      <Route element={<PrivateRoutes/>}>
+      <Route element={<PrivateRoutes/>}>{/*private routes have been updated in the new version of react*/}
           <Route  path='/user/dashboard' element={<UserDashboard/>}/>
+          <Route path='/cart'  element={<Cart/>}/> 
       </Route> 
     </Routes>
   </Router>

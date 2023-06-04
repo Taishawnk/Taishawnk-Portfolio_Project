@@ -1,29 +1,45 @@
-import React from "react";
+import React, {useState} from "react";
 import ImageHelper from "./helper/imagehelper";
 import { Navigate } from 'react-router-dom';
 import { addItemToCart, removedFromCart } from "./helper/carthelper";
+import { isAuthenticated } from "../auth/helper";
 
-const isAuthenticated = false;
+ 
 
 const Card = ({
   product,
-  addtoCart = isAuthenticated, //if is ath then customer cannot add to cart
+  addtoCart = isAuthenticated, 
   removeFromCart = false, //if true will show the remove from cart btn
+  reload = undefined,
+
+  setReload = f => f,
+  //function f return f
+
 }) => {
+
+  const [redirect, setRedirect] = useState(false);//inital value of redirect is false state change
+  const [redir, toSignUP] = useState(false);//created so if user trys to add to cart and they are not signed in the will be take to sign up page created goTOSignUP for this as well 
   const cardTitle = product ? product.name : "We forgot to add a name";
   const cardDescription = product ? product.description : "no description at this time";
   const cardPrice = product ? product.price : "contact for pricing ";
 
   const addToCart = () => {
-    if (isAuthenticated) {
-      addItemToCart(product, () => {});
+    if (isAuthenticated()) {
+      addItemToCart(product, () => setRedirect(true));
       console.log("Added to cart");
     } else {
-      console.log("Login Please!");
+      toSignUP(true)
     }
   };
 
-  const getAreRedirect = (redirect) => {
+  const goToSignUp = (redir) =>{
+    if (redir){
+      return <Navigate to="/signup"/>;
+    }
+
+  }
+
+  const getRedirect = (redirect) => {
     if (redirect) {
       return <Navigate to="/cart" />;
     }
@@ -34,8 +50,7 @@ const Card = ({
       addToCart && (
         <button
           onClick={addToCart}
-          className="btn btn-block btn-outline-success mt-2 mb-2"
-        >
+          className="btn btn-block btn-outline-success mt-2 mb-2">
           Add to Cart
         </button>
       )
@@ -48,10 +63,11 @@ const Card = ({
         <button
           onClick={() =>{
             removedFromCart(product.id)
+            //one card is remove I am flippin the switch to actually remove it from the cart and not just in state and remounts state  the ! turns to into false and false into true
+            setReload(!reload)
             console.log("Item was removed")
           }}
-          className="btn btn-block btn-outline-danger mt-2 mb-2"
-        >
+          className="btn btn-block btn-outline-danger mt-2 mb-2">
           Remove from cart
         </button>
       )
@@ -62,6 +78,8 @@ const Card = ({
     <div className="card text-white bg-dark border border-info ">
       <div className="card-header lead">{cardTitle}</div>
       <div className="card-body">
+        { goToSignUp(redir)}
+        {getRedirect(redirect)}
         <ImageHelper product={product} />
         <p className="lead bg-success font-weight-normal text-wrap">
           {cardDescription}
