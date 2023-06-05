@@ -8,7 +8,7 @@ import { isAuthenticated } from "../auth/helper";
 
 const Card = ({
   product,
-  addtoCart = isAuthenticated, 
+  addtoCart = true, 
   removeFromCart = false, //if true will show the remove from cart btn
   reload = undefined,
 
@@ -47,7 +47,7 @@ const Card = ({
 
   const showAddtobtn = (addToCart) => {
     return (
-      addToCart && (
+      addtoCart && (
         <button
           onClick={addToCart}
           className="btn btn-block btn-outline-success mt-2 mb-2">

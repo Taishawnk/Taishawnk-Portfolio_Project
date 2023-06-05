@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";//use useEffect whenever you want somthing to mount before the component in this case load cart
 import Base from "./Base";
-
 import Card from "./Card";
 import { loadCart } from "./helper/carthelper";//useEffect  will make sure that load cart runs before the component mounts 
+import PaymentB from "./PaymentB";
 
 
 
@@ -12,7 +12,7 @@ const Cart = () =>{
     
     useEffect(() => {
         setProducts(loadCart)
-    }, [reload])//final peice to the puzzle will set th
+    }, [reload])//final peice to the puzzle will load up the carts state before everthing else is mounted
 
     const loadAllProducts = (products) => {
         return(
@@ -52,7 +52,11 @@ const Cart = () =>{
             </div>
 
             <div className="col-6">
-                {loadCheckOut()}
+            {products.length > 0 ? (
+            <PaymentB products={products} setReload={setReload} />
+          ) : (
+            <h3>Please log in or add items to the cart</h3>
+          )}
             </div>
         </div>
         </Base>

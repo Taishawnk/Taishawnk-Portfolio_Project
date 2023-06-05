@@ -1,7 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
 
-
 // this file is or everthing that is 
 
 const Base = ({
@@ -28,8 +27,8 @@ children //is responsable for basic templete insertion of components
                 <footer className="footer bg-dark mt-auto py-3">{/*footer*/}
                     <div className="container-fluid rounded bg-success text-white text-center py-3">
                         <h4>If you have any question, reach out to us at Triforge main site </h4>
-                        <button className=" btn btn-warning  btn-lg">Contact</button>
-                        <div className="container">
+                        <button className=" btn btn-warning  btn-lg" ><a className="contact-btn" href="https://www.triforgetech.com/">Contact </a></button>
+                        <div className="container">  
                             <span className="text-muted">An Amazing Site using Django and React</span>
                         </div>
                     </div>

@@ -32,10 +32,14 @@ def validate_user_session(id, token):
     except UserModel.DoesNotExist:
         return False
 
+from django.http import JsonResponse
+
+# ...
+
 @csrf_exempt
 def generate_token(request, id, token):
     if not validate_user_session(id, token):
-        return JsonResponse('error', 'invalid session, please login again')
+        return JsonResponse({'error': 'invalid session, please login again'}, safe=False)
     return JsonResponse({'clientToken': gateway.client_token.generate(), 'success': True})
 
 
