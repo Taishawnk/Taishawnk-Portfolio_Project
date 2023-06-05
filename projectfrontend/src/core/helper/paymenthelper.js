@@ -21,6 +21,7 @@ export const processPayment = (userId, token, paymentInfo) => {
         method: "POST",
         body: formData,
     }).then(response => {
+        console.log("tk-0" , response)
         return response.json();
     }).catch(error => console.log("hmmm looks like there has been a error", error))
 }
