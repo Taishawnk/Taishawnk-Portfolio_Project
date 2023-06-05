@@ -63,40 +63,40 @@ const PaymentB = ({
       };
       processPayment(userId, token, paymentData)
         .then((response) => {
-          console.log("POINT-1", response);
+          console.log("Response:", response);
           if (response.error) {
-            if (response.code == "1") {
-              console.log("PAYMENT Failed!");
+            if (response.error.code === "1") { // Adjust the property name if needed
+              console.log("Payment Failed!");
               signout(() => {
                 return <Navigate to="/" />;
               });
             }
           } else {
             setInfo({ ...info, success: response.success, loading: false });
-            console.log("PAYMENT SUCCESS");
-
+            console.log("Payment Success");
+  
             let product_names = "";
             products.forEach(function (item) {
               product_names += item.name + ", ";
             });
-
+  
             const orderData = {
               products: product_names,
-              transaction_id: response.transaction.id,
-              amount: response.transaction.amount,
+              transaction_id: response.transaction.id, // Adjust the property name if needed
+              amount: response.transaction.amount, // Adjust the property name if needed
             };
             creatOrder(userId, token, orderData)
               .then((response) => {
                 if (response.error) {
-                  if (response.code == "1") {
+                  if (response.error.code === "1") { // Adjust the property name if needed
                     console.log("Order Failed!");
                     signout(() => {
                       return <Navigate to="/" />;
                     });
                   }
                 } else {
-                  if (response.success == true) {
-                    console.log("ORDER PLACED!!");
+                  if (response.success === true) { // Adjust the property name if needed
+                    console.log("Order Placed!!");
                   }
                 }
               })
@@ -105,19 +105,19 @@ const PaymentB = ({
                 console.log("Order FAILED", error);
               });
             cartEmpty(() => {
-              console.log("Did we got a crash?");
+              console.log("Did we get a crash?");
             });
-
+  
             setReload(!reload);
           }
         })
         .catch((error) => {
           setInfo({ loading: false, success: false });
-          console.log("PAYMENT FAILED", error);
+          console.log("Payment FAILED", error);
         });
     });
-  };
-
+};
+ 
   const showbtnDropIn = () => {
     return (
       <div>
