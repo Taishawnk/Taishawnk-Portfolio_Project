@@ -60,7 +60,7 @@ const Menu = () => {
         )}
 
         {isAuthenticated() && (
-          <li>
+          <li className="navz nav-item">
             <Link className="spn-signout nav-link" to="/" onClick={handleSignout}>
               SignOut
             </Link>

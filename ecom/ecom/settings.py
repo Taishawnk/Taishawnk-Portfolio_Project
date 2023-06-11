@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'api.user',
     'api.order',
     'api.payment',
+    # pipenv django-storages and pipenv install boto3 to handle static file s3 buckets
+    'storages',
 ]
 
 CSP_DEFAULT_SRC = ("'self'",)
@@ -108,10 +110,19 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'portfolio_tk_db',
+        'USER': 'TaishawnKingCEO',
+        'PASSWORD':'Zululike1',
+        'HOST': 'database-1.c4qgyp7wedyb.us-east-1.rds.amazonaws.com',
+        'Port': '5432',
+        'OPTIONS': {'options': '-c timezone=UTC'},
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
@@ -145,7 +156,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -154,6 +165,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'# I added this in to handle our midea folders and files 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# creats pathing from our media_root to our Base dir
+
+#To allow django-admin collectstatic to automatically put your static files in your bucket set the following in your settings.py:
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
 AUTH_USER_MODEL = 'user.CustomUser' #telling our project we have a CustomeUser
 
 

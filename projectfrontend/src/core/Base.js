@@ -4,18 +4,18 @@ import Menu from "./Menu";
 // this file is or everthing that is 
 
 const Base = ({
-title = 'My Title',
-description = "my description",
-className = "bg-dark text-white p-4",
+title = 'Taishawn Portfolio E-Commerce',
+description = "A Mock ECommerce site",
+className = "card-f bg-dark text-white p-4",
 children //is responsable for basic templete insertion of components
 }) =>{ 
     return(
         <div className="wholeProjectDiv">
             <Menu/> 
-            <div className="container-fluid">{/*head*/}
+            <div className=" nav-wrapper container-fluid">{/*Nav*/}
                 <div className="jubotron bg-dark text-white text-center">
-                    <h2 className="display-4">{title}</h2>
-                    <p className="lead">{description}</p>
+                    <h2 className="page-title display-4">{title}</h2>
+                    <p className="page-title-discription lead">{description}</p>
                 </div>
 
                 <div className={className}>{/*body*/}

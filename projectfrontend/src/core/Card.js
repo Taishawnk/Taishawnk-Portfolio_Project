@@ -50,7 +50,7 @@ const Card = ({
       addtoCart && (
         <button
           onClick={addToCart}
-          className="btn btn-block btn-outline-success mt-2 mb-2">
+          className="add-btn btn btn-block btn-outline-success mt-2 mb-2">
           Add to Cart
         </button>
       )
@@ -75,18 +75,18 @@ const Card = ({
   };
 
   return (
-    <div className="card text-white bg-dark border border-info ">
+    <div className="card-body-go text-white bg-dark border border-info ">
       <div className="card-header lead">{cardTitle}</div>
       <div className="card-body">
         { goToSignUp(redir)}
         {getRedirect(redirect)}
         <ImageHelper product={product} />
-        <p className="lead bg-success font-weight-normal text-wrap">
+        <p className="card-discription lead bg-success font-weight-normal text-wrap">
           {cardDescription}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-4">{`$${cardPrice}`}</p>
+        <p className="price btn btn-success rounded  btn-sm px-4">{`$${cardPrice}`}</p>
         <div className="row">
-          <div className="col-12">{showAddtobtn(addToCart)}</div>
+          <div className=" col-12">{showAddtobtn(addToCart)}</div>
           <div className="col-12">{showRemovebtn(removeFromCart)}</div>
         </div>
       </div>

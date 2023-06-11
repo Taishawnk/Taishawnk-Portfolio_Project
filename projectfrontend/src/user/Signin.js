@@ -7,8 +7,8 @@ import {signin, authenticate, isAuthenticated} from "../auth/helper/index"
 const Signin = () => {
   const [values, setValues] = useState({
     name: "",
-    email: "tk@yahoo.com",
-    password: "Tlike1@@",
+    email: "tking@yahoo.com",
+    password: "Zululike1@@",
     error: false,
     success: false,
     loading: false,
@@ -48,7 +48,7 @@ const Signin = () => {
         }
       }).catch(
       (err) => console.log("you have a error of", err)
-    )//destructuiong
+    )//destructuing
   }
 
   const Redirecting = () => {
@@ -96,7 +96,7 @@ const Signin = () => {
 
             <button
               onClick={onSubmit}
-              className="btn btn-success btn-block position-relative bottom-0 start-50 translate-middle-x"
+              className="buttonz btn btn-success btn-block position-relative bottom-0 start-50 translate-middle-x"
             >
               Submit
               {/* submit in the onclick is in reference to the above method submit, not the submit button */}
@@ -108,7 +108,7 @@ const Signin = () => {
   };
 
   return (
-    <Base title="Welcome to the Sign in page" description="A Manly Ecommerce store">\
+    <Base title="Welcome to the Sign in page" description="A Manly Ecommerce store">
       {loadingMessage()}
       
       {signInForm()}

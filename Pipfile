@@ -11,6 +11,10 @@ django = "==3.0.8"
 braintree = "*"
 django-csp = "*"
 virtualenv = "*"
+mysqlclient = "*"
+psycopg2 = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 pytest = "*"
