@@ -25,7 +25,13 @@ SECRET_KEY = '1x6uwe63v9+g_^*-lcd0+j@)nz7mjbe(=&&=w@movk2n8gq%%+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['localhost', 'tk-portfolio.herokuapp.com']
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://tk-portfolio.herokuapp.com',
+    'http://localhost:3000',
+    # Add more allowed origins as needed
+]
 
 CORS_ALLOW_METHODS = [    'DELETE',    'GET',    'OPTIONS',    'PATCH',    'POST',    'PUT',]
 
@@ -69,7 +75,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
+    'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     
 ]
 MIDDLEWARE.insert(
@@ -165,10 +172,22 @@ USE_L10N = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'# I added this in to handle our midea folders and files 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# creats pathing from our media_root to our Base dir
-
+#dont want to see my auth token in the image path
+AWS_QUERYSTRING_AUTH = False
 #To allow django-admin collectstatic to automatically put your static files in your bucket set the following in your settings.py:
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+#To upload your media files to S3 set:
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+#giving access to s3 bucket through AWS IAM
+AWS_ACCESS_KEY_ID = 'AKIA4YDO5RUR6W7GYO7O'
+AWS_SECRET_ACCESS_KEY = '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'
+#telling my app what bucket we are giving access to 
+AWS_STORAGE_BUCKET_NAME = 'tk-img-bucket'
+#AWS_S3_FILE_OVERWRITE (optional: default is True) => can add this and set it to fales
+#if i want to be able to add images with same name and not have them overwrite eachother
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 AUTH_USER_MODEL = 'user.CustomUser' #telling our project we have a CustomeUser
 
 
@@ -184,9 +203,12 @@ REST_FRAMEWORK = {# added this in myself as well setts default permissions that 
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'path/to/folder/containing/favicon.ico'),
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'path/to/folder/containing/favicon.ico'),
+#]
 
 
-
+#checking to see if app is live then turning debug to false we do not set true in production
+#only when locally
+if os.getcwd() == '/app':
+    DEBUG = False
