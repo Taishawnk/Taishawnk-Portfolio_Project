@@ -1,0 +1,164 @@
+body{
+    background-color: #212529;
+    }
+    
+    .card-body{
+        height: 100%;
+    }
+    .snsub{
+        margin-top: 10px;
+    }
+    
+    .ftrContact{
+        text-decoration: none;
+        color: white;
+    }
+    
+    ul{
+        list-style-type: none;
+        height: 50px;
+        width: 25%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;   
+        
+    }
+    
+    li{
+    background-color: #198754;
+    border-radius: 5px;
+   
+    }
+    
+    .navz{
+        
+        width: 50rem;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 5%;
+    }
+    
+    .inner-navz{
+        padding-top: 0.5em;
+        text-decoration: none;
+        color: whitesmoke;
+        
+    }
+    
+    .inner-navz:hover{
+        height: 100%;
+        width: 100%;
+        color: black;
+    }
+    
+   .spn-signout{
+    width: 6rem;
+    color:red;
+    margin-top: 8px;
+    
+}
+
+.imgs{
+    width: 100%;
+    height: 100%;
+}
+
+.contact-btn{
+    text-decoration: none;
+    color: #198754;
+}
+
+
+@media all  
+    and (max-width: 480px){
+    #body{
+        width: 100vw;
+    }
+
+    .card-f{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .card-header{
+        text-align: center;
+    }
+
+    .row{
+        width: 100%;
+        display: grid;
+        grid-column: 1fr;
+    }
+    .col-4{
+        width: 100%;
+        
+    }
+    .col-6{
+        width: 100%;
+    }
+ 
+    .inner-nav{
+        width: 100vw;
+        display: flex;
+        justify-content: left;
+        border: none;
+        padding: 0%;
+        
+    }
+    .navz{
+        width: 100%;
+        font-size: 12px;
+        margin: 2px;
+    }
+    .spn-signout{
+       color: #1d0101;
+    }
+    .page-title{
+        display: flex;
+        justify-content: center;
+    }
+    .page-title-discription{
+        display: flex;
+        justify-content: center;
+    }
+
+    
+
+    .card-discription{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .price{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .col-12{
+        margin: 0%;
+        padding: 0%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+    }
+    .add-btn{
+        width: 50%;
+        margin: 0%;
+        padding: 0%;
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;
+        
+    }
+    .footer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+    }
+}
+    

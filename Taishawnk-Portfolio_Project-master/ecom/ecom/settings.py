@@ -203,9 +203,9 @@ REST_FRAMEWORK = {# added this in myself as well setts default permissions that 
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, 'media'),
-] 
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'path/to/folder/containing/favicon.ico'),
+#]
 
 
 #checking to see if app is live then turning debug to false we do not set true in production
